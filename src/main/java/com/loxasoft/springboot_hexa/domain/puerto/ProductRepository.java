@@ -6,7 +6,10 @@ import java.util.Optional;
 
 public interface ProductRepository {
     Iterable<Product> getProducts();
+
     Optional<Product> getProduct(Integer id);
+
     Product saveProduct(Product product);
-    void deleteProduct(Integer id);
+
+    void deleteProductById(Integer id);
 }
