@@ -4,7 +4,6 @@ import com.loxasoft.springboot_hexa.domain.model.Product;
 import com.loxasoft.springboot_hexa.domain.puerto.ProductRepository;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 public class DomainProductService implements ProductService {
 
@@ -20,16 +19,18 @@ public class DomainProductService implements ProductService {
     }
 
     @Override
-    public Optional<Product> getProductById(Integer id) {
-        return this.productRepository.getProduct(id);
+    public Product getProductById(Integer id) {
+        return this.productRepository.getProduct(id).get();
     }
 
     @Override
     public Product saveProduct(Product product) {
-        if (product.getId() == null) {
+        if (product.getId() != null) {
+            product.setDateUpdated(LocalDateTime.now());
+        } else {
             product.setDateCreated(LocalDateTime.now());
+            product.setDateUpdated(LocalDateTime.now());
         }
-        product.setDateUpdated(LocalDateTime.now());
         return this.productRepository.saveProduct(product);
     }
 
