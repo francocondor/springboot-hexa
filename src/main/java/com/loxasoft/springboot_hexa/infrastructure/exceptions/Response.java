@@ -12,6 +12,4 @@ public class Response {
     public void addError(Error error) {
         this.errors.add(error);
     }
-
-    ;
 }
